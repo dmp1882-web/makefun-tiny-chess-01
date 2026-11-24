@@ -21,10 +21,13 @@ POST /move plays a move in UCI.
 
 ## Size
 
-- `main.py` is the whole engine: 3,930 bytes as committed, Python 3.13
-  standard library only. It is a minified source packed as an lzma payload
-  with its unpacker (`import lzma;exec(lzma.decompress(...))`); the payload
-  and the unpacker both count toward the 4,096-byte cap.
+- `main.py` is the whole engine: 3,350 bytes as committed, Python 3.13
+  standard library only. It is the minified source packed by the kit's
+  `makefun compress` (a `makefun-compress/v1` stub around an LZMA stream
+  of the source); the stub and the stream both count toward the 4,096-byte
+  cap. The readable source is `dev/engine.py`; the packed source is the
+  minified form in `src.py`, written by the agent and packed with
+  `makefun compress src.py --out main.py`.
 - The whole repository (main.py, LICENSE, README) is under the 8,192-byte
   cap, no file over 4,096.
 
